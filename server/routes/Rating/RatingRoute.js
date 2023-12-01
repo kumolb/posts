@@ -1,7 +1,5 @@
-app.use(bodyParser.json());
+const route = require("express").Router();
 
-// Routes
-// Create
 app.post('/ratings', async (req, res) => {
     try {
         const newRating = new Rating(req.body);
