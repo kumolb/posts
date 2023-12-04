@@ -7,8 +7,8 @@ class OrganizationRepository {
     }
 
     // Read
-    async getOrganizationById(id) {
-        return await Organization.findOne(id).lean();
+    async getOrganizationById(query) {
+        return await Organization.findOne(query).lean();
     }
 
     async getAllOrganizations(query) {
@@ -16,13 +16,17 @@ class OrganizationRepository {
     }
 
     // Update
-    async updateOrganization(id, data) {
-        return await Organization.update(id, { $set: data });
+    async updateOrganization({ id }, data) {
+        return await Organization.update({ id }, { $set: data });
     }
 
     // Delete
-    async deleteOrganization(id) {
-        return await Organization.findByIdAndDelete(id);
+    async deleteOrganization({ id }) {
+        return await Organization.findByIdAndDelete({ id });
+    }
+
+    async countOrganization(query) {
+        return await Organization.countDocuments(query);
     }
 }
 
