@@ -1,49 +1,22 @@
-app.use(bodyParser.json());
-
-// Routes
-// Create
-app.post('/ratings', async (req, res) => {
-    try {
-        const newRating = new Rating(req.body);
+const Rating = require("../../models/Rating");
+class RatingRepository {
+    async saveRating(data) {
+        const newRating = new Rating(data);
         const savedRating = await newRating.save();
-        res.json(savedRating);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        return savedRating;
     }
-});
-
-// Read
-app.get('/ratings', async (req, res) => {
-    try {
-        const ratings = await Rating.find();
-        res.json(ratings);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    async getRating(query) {
+        const ratings = await Rating.find(query).lean();
+        return ratings;
     }
-});
-
-// Update
-app.put('/ratings/:id', async (req, res) => {
-    try {
-        const updatedRating = await Rating.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            {
-                new: true,
-            }
-        );
-        res.json(updatedRating);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+    async updatedRating(query) {
+        const updatedRating = await Rating.update({ ...query }, { ...updatedObj });
+        return updatedRating;
     }
-});
-
-// Delete
-app.delete('/ratings/:id', async (req, res) => {
-    try {
+    async deletedRating(query) {
         const deletedRating = await Rating.findByIdAndDelete(req.params.id);
-        res.json(deletedRating);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        return deletedRating;
     }
-});
+}
+
+module.exports = new RatingRepository();
