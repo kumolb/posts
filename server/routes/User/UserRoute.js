@@ -1,11 +1,10 @@
+const UserController = require("../../controller/User/UserController");
+
 const route = require("express").Router();
-route.get('/');
-route.get('/:id');
-// POST a new user
-route.post('/');
-// PUT/UPDATE a user by ID
-route.put('/:id');
-// DELETE a user by ID
-route.delete('/:id');
+route.get('/', UserController.getUser);
+route.get('/:id', UserController.getOneUser);
+route.post('/', UserController.saveUser);
+route.put('/:id', UserController.updateUser);
+route.delete('/:id', UserController.deleteUser);
 
 module.exports = route;

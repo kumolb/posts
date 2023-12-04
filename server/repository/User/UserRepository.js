@@ -1,12 +1,18 @@
 const User = require("../../models/User/User");
-export class UserRepository {
+class UserRepository {
     async saveUser(data) {
         const newUser = new User(data);
         const savedUser = await newUser.save();
         return savedUser;
     }
-    async getUser(query) {
-        let user = await User.find(query).lean();
+    async getUser(query, option) {
+        let limit = option.limit;
+        let page = option.page;
+        let user = await User.find(query).lean().skip(limit * (page - 1)).limit(limit);
+        return user;
+    }
+    async getOneUser(query) {
+        let user = await User.findOne(query).lean();
         return user;
     }
     async updatedUser(query, updatedObj) {
@@ -14,7 +20,13 @@ export class UserRepository {
         return updatedUser;
     }
     async deletedUser(query) {
-        const deletedUser = await User.findByIdAndDelete(req.params.id);
+        const deletedUser = await User.findByIdAndDelete(query);
         return deletedUser;
     }
+
+    async userCount(query) {
+        return await User.countDocuments(query);
+    }
 }
+
+module.exports = new UserRepository();
