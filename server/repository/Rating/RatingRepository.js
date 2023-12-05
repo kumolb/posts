@@ -9,13 +9,21 @@ class RatingRepository {
         const ratings = await Rating.find(query).lean();
         return ratings;
     }
-    async updatedRating(query) {
+    async getRating(query) {
+        const rating = await Rating.findOne(query).lean();
+        return rating;
+    }
+    async updatedRating(query, updatedObj) {
         const updatedRating = await Rating.update({ ...query }, { ...updatedObj });
         return updatedRating;
     }
     async deletedRating(query) {
-        const deletedRating = await Rating.findByIdAndDelete(req.params.id);
+        const deletedRating = await Rating.findByIdAndDelete(query);
         return deletedRating;
+    }
+
+    async countRating(query) {
+        return await Rating.countDocuments(query)
     }
 }
 
