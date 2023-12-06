@@ -1,4 +1,5 @@
 const app = require("express").Router();
-app.use();
+const appRouter = require("../server/routes/index");
+app.use(appRouter);
 
 module.exports = app;

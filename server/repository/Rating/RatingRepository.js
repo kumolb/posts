@@ -1,4 +1,4 @@
-const Rating = require("../../models/Rating");
+const Rating = require("../../models/Rating/Rating");
 class RatingRepository {
     async saveRating(data) {
         const newRating = new Rating(data);

@@ -1,4 +1,4 @@
-const Organization = require("../../models/Organization");
+const Organization = require("../../models/Organization/Organization");
 
 class OrganizationRepository {
     async createOrganization(data) {

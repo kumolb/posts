@@ -1,5 +1,5 @@
-const { LocalStorage } = require("node-localstorage");
-const localStorage = new LocalStorage('./api_handler');
+// const { LocalStorage } = require("node-localstorage");
+// const localStorage = new LocalStorage('./api_handler');
 module.exports.success = (res, msg, body, optional) => {
     let responseObj = {
         statusCode: 200,
@@ -77,33 +77,33 @@ module.exports.conflict = (res, msg, body) => {
     });
 };
 
-module.exports.rateLimit = (req, res, next) => {
-    let counter = JSON.parse(localStorage.getItem(`${req.clientIp}`));
-    if (!counter) {
-        localStorage.setItem(`${req.clientIp}`, JSON.stringify({ time: Date.now(), count: 1 }));
-        counter = JSON.parse(localStorage.getItem(`${req.clientIp}`));
-    }
-    let time = Date.now() - counter.time;
-    if (time > (1000 * 10)) {
-        localStorage.removeItem(`${req.clientIp}`);
-        localStorage.setItem(`${req.clientIp}`, JSON.stringify({ time: Date.now(), count: 1 }));
-        time = 0;
-    }
-    if (time < (1000 * 10) && counter.count > 2) {
-        return res.status(400).json({
-            success: false,
-            message: "Server is under heavy load"
-        });
-    }
-    localStorage.setItem(`${req.clientIp}`, JSON.stringify({ ...counter, count: (counter.count || 1) + 1 }));
-    // if (!firstSet) {
-    //     localStorage.removeItem(`${req.clientIp}`);
+// module.exports.rateLimit = (req, res, next) => {
+//     let counter = JSON.parse(localStorage.getItem(`${req.clientIp}`));
+//     if (!counter) {
+//         localStorage.setItem(`${req.clientIp}`, JSON.stringify({ time: Date.now(), count: 1 }));
+//         counter = JSON.parse(localStorage.getItem(`${req.clientIp}`));
+//     }
+//     let time = Date.now() - counter.time;
+//     if (time > (1000 * 10)) {
+//         localStorage.removeItem(`${req.clientIp}`);
+//         localStorage.setItem(`${req.clientIp}`, JSON.stringify({ time: Date.now(), count: 1 }));
+//         time = 0;
+//     }
+//     if (time < (1000 * 10) && counter.count > 2) {
+//         return res.status(400).json({
+//             success: false,
+//             message: "Server is under heavy load"
+//         });
+//     }
+//     localStorage.setItem(`${req.clientIp}`, JSON.stringify({ ...counter, count: (counter.count || 1) + 1 }));
+//     // if (!firstSet) {
+//     //     localStorage.removeItem(`${req.clientIp}`);
 
-    // }
-    return res.json({
-        success: true,
-        time: time,
-        counter: counter
-    })
-    //console.log(counter.count);
-};
+//     // }
+//     return res.json({
+//         success: true,
+//         time: time,
+//         counter: counter
+//     })
+//     //console.log(counter.count);
+// };

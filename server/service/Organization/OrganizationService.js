@@ -5,9 +5,9 @@ class OrganizationService {
         let organization = await OrganizationRepository.createOrganization(data);
         return organization;
     }
-    async getOrganization(query) {
-        let query = query.query;
-        let option = query.option;
+    async getOrganization(data) {
+        let query = data.query;
+        let option = data.option;
         let organization = await OrganizationRepository.getAllOrganizations(query, option);
         return organization;
     }
