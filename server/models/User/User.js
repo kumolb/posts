@@ -21,72 +21,70 @@ let user = [
     },
 ];
 
-let userSchema = () => {
-    const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-    const experienceSchema = new mongoose.Schema({
-        orgName: {
-            type: String,
-            required: true,
-        },
-        orgId: {
-            type: String,
-            required: true,
-        },
-        from: {
-            type: String,
-            required: true,
-        },
-        to: {
-            type: String,
-        },
-        position: {
-            type: String,
-            required: true,
-        },
-        stillWorking: {
-            type: Boolean,
-            default: true,
-        },
-    });
+const experienceSchema = new mongoose.Schema({
+    orgName: {
+        type: String,
+        required: true,
+    },
+    orgId: {
+        type: String,
+        required: true,
+    },
+    from: {
+        type: String,
+        required: true,
+    },
+    to: {
+        type: String,
+    },
+    position: {
+        type: String,
+        required: true,
+    },
+    stillWorking: {
+        type: Boolean,
+        default: true,
+    },
+});
 
-    const userSchema = new mongoose.Schema({
-        id: {
-            type: String,
-            required: true,
-        },
-        name: {
-            type: String,
-            required: true,
-        },
-        phone: {
-            type: String,
-            required: true,
-        },
-        password: {
-            type: String,
-            required: true,
-        },
-        experience: [experienceSchema],
-        lookingForJob: {
-            type: Boolean,
-            default: true,
-        },
-        employee: {
-            type: Boolean,
-            default: true,
-        },
-        roleId: {
-            type: String,
-            required: true,
-        },
-        orgId: {
-            type: String,
-            required: true,
-        },
-    });
+const userSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    experience: [experienceSchema],
+    lookingForJob: {
+        type: Boolean,
+        default: true,
+    },
+    employee: {
+        type: Boolean,
+        default: true,
+    },
+    roleId: {
+        type: String,
+        required: true,
+    },
+    orgId: {
+        type: String,
+        required: true,
+    },
+});
 
-    const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-    module.exports = User;
-};
+module.exports = User;

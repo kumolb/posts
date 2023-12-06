@@ -1,13 +1,18 @@
 const UserRepository = require("../../repository/User/UserRepository");
+const AuthService = require("./AuthService");
 class UserService {
     async createUser(data) {
-        let user = await UserRepository.saveUser(data);
+        if(data.password){
+            data.password = AuthService.encryptPassword(data.password);
+        }
+        console.log(data)
+        // let user = await UserRepository.saveUser(data);
         return user;
     }
     async getUser(data) {
         let query = data.query;
         let option = data.option;
-        let user = await UserRepository.getOneUser(query, option);
+        let user = await UserRepository.getUser(query, option);
         return user;
     }
 

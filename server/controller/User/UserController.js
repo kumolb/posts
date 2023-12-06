@@ -4,6 +4,7 @@ const { throughError, created, success, notFound, notModified } = require("../..
 class UserController {
     async saveUser(req, res, next) {
         try {
+            console.log(req.body)
             let user = await UserService.createUser(req.body);
             if (user) {
                 return created(res, "Created successfully", user);
@@ -16,9 +17,11 @@ class UserController {
     }
     async getUser(req, res, next) {
         try {
+            res.requestTime = new Date();
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
-            let user = await UserService.getUser({ query: req.query, option: { page, limit } });
+            let query = req.query || {}
+            let user = await UserService.getUser({ query, option: { page, limit } });
             let totalUser = await UserService.userCount(query);
             if (user && user.length > 0) {
                 return success(res, "User fatched successful", user, { page, limit, total: totalUser });

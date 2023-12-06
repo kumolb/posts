@@ -18,7 +18,8 @@ class RatingController {
         try {
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
-            let rating = await RatingService.getRating({ query: req.query, option: { page, limit } });
+            let query = req.query || {}
+            let rating = await RatingService.getRating({ query, option: { page, limit } });
             let totalRating = await RatingService.ratingCount(query);
             if (rating && rating.length > 0) {
                 return success(res, "Rating fatched successful", rating, { page, limit, total: totalRating });

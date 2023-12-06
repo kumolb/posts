@@ -3,7 +3,8 @@
 module.exports.success = (res, msg, body, optional) => {
     let responseObj = {
         statusCode: 200,
-        success: true
+        success: true,
+        requestTime: `${((new Date() - (res.time || new Date()))/1000)}s`
     };
     optional ? optional.total ? responseObj.total = optional.total : null : null;
     optional ? optional.limit ? responseObj.limit = optional.limit : null : null;

@@ -2,6 +2,7 @@ const User = require("../../models/User/User");
 class UserRepository {
     async saveUser(data) {
         const newUser = new User(data);
+        newUser.id = newUser._id;
         const savedUser = await newUser.save();
         return savedUser;
     }

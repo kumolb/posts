@@ -18,7 +18,8 @@ class PostController {
         try {
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
-            let post = await PostService.getPost({ query: req.query, option: { page, limit } });
+            let query = req.query || {}
+            let post = await PostService.getPost({ query, option: { page, limit } });
             let totalPost = await PostService.postCount(query);
             if (post && post.length > 0) {
                 return success(res, "Post fatched successful", post, { page, limit, total: totalPost });

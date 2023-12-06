@@ -5,6 +5,7 @@ const { throughError, created, success, notFound, notModified } = require("../..
 class OrganizationController {
     async saveOrganization(req, res, next) {
         try {
+            let time = new Date();
             let organization = await OrganizationService.createOrganization(req.body);
             if (organization) {
                 return created(res, "Created successfully", user);
@@ -17,9 +18,12 @@ class OrganizationController {
     }
     async getOrganization(req, res, next) {
         try {
+            let time = new Date();
+            console.log(res);
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
-            let organization = await OrganizationService.getOrganization({ query: req.query, option: { page, limit } });
+            let query = req.query || {};
+            let organization = await OrganizationService.getOrganization({ query, option: { page, limit } });
             let totalOrganization = await OrganizationService.OrganizationCount(query);
             if (organization && organization.length > 0) {
                 return success(res, "Organization fatched successful", organization, { page, limit, total: totalOrganization });
