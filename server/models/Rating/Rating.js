@@ -59,6 +59,10 @@ const ratingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    author: {
+        type: String,
+        required: true,
+    }
 });
 
 const Rating = mongoose.model('Rating', ratingSchema);

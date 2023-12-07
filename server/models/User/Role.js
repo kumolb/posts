@@ -14,6 +14,10 @@ const roleSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    author: {
+        type: String,
+        required: true,
+    }
 });
 
 const Role = mongoose.model('Role', roleSchema);

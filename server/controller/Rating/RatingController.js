@@ -4,6 +4,8 @@ const { throughError, created, success, notFound, notModified } = require("../..
 class RatingController {
     async saveRating(req, res, next) {
         try {
+            res.time = new Date();
+            req.body.author = req.user;
             let rating = await RatingService.createRating(req.body);
             if (rating) {
                 return created(res, "Created successfully", rating);
@@ -16,6 +18,7 @@ class RatingController {
     }
     async getRating(req, res, next) {
         try {
+            res.time = new Date();
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
             let query = req.query || {}
@@ -32,6 +35,7 @@ class RatingController {
     }
     async getOneRating(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let rating = await RatingService.getOneRating({ id });
             if (rating) {
@@ -45,6 +49,7 @@ class RatingController {
     }
     async updateRating(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let updated = await RatingService.updateRating({ query: { id }, option: req.body });
             if (updated && updated.nMatched && updated.nModified) {
@@ -58,6 +63,7 @@ class RatingController {
     }
     async deleteRating(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let deleted = await RatingService.deleteRating({ id });
             if (deleted && deleted.ok) {

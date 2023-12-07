@@ -21,6 +21,14 @@ const workingDaySchema = new mongoose.Schema({
 });
 
 const organizationSchema = new mongoose.Schema({
+    userName: {
+        type: String,
+        default: ""
+    },
+    password: {
+        type: String,
+        default: ""
+    },
     id: {
         type: String,
         required: true,
@@ -66,6 +74,10 @@ const organizationSchema = new mongoose.Schema({
         required: true,
     },
     workingDays: [workingDaySchema],
+    author: {
+        type: String,
+        required: true
+    }
 });
 
 const Organization = mongoose.model('Organization', organizationSchema);

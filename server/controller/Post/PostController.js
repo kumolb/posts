@@ -4,6 +4,8 @@ const { throughError, created, success, notFound, notModified } = require("../..
 class PostController {
     async savePost(req, res, next) {
         try {
+            res.time = new Date();
+            req.body.author = req.user;
             let post = await PostService.createPost(req.body);
             if (post) {
                 return created(res, "Created successfully", post);
@@ -16,6 +18,7 @@ class PostController {
     }
     async getPost(req, res, next) {
         try {
+            res.time = new Date();
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
             let query = req.query || {}
@@ -32,6 +35,7 @@ class PostController {
     }
     async getOnePost(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let post = await PostService.getOnePost({ id });
             if (post) {
@@ -45,6 +49,7 @@ class PostController {
     }
     async updatePost(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let updated = await PostService.updatePost({ query: { id }, option: req.body });
             if (updated && updated.nMatched && updated.nModified) {
@@ -58,6 +63,7 @@ class PostController {
     }
     async deletePost(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let deleted = await PostService.deletePost({ id });
             if (deleted && deleted.ok) {

@@ -2,9 +2,9 @@
 // const localStorage = new LocalStorage('./api_handler');
 module.exports.success = (res, msg, body, optional) => {
     let responseObj = {
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 200,
-        success: true,
-        requestTime: `${((new Date() - (res.time || new Date()))/1000)}s`
+        success: true
     };
     optional ? optional.total ? responseObj.total = optional.total : null : null;
     optional ? optional.limit ? responseObj.limit = optional.limit : null : null;
@@ -17,6 +17,7 @@ module.exports.success = (res, msg, body, optional) => {
 
 module.exports.created = (res, msg, body) => {
     return res.status(200).json({
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 201,
         success: true,
         message: msg || "Successfully Created",
@@ -27,6 +28,7 @@ module.exports.created = (res, msg, body) => {
 
 module.exports.notFound = (res, msg, body, optional) => {
     let responseObj = {
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 204,
         success: false
     };
@@ -41,6 +43,7 @@ module.exports.notFound = (res, msg, body, optional) => {
 
 module.exports.notModified = (res, msg, body) => {
     return res.status(200).json({
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 304,
         success: false,
         message: msg ? msg : "",
@@ -51,6 +54,7 @@ module.exports.notModified = (res, msg, body) => {
 
 module.exports.throughError = (res, body) => {
     return res.status(500).json({
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 500,
         success: false,
         message: body ? body.message : "",
@@ -61,6 +65,7 @@ module.exports.throughError = (res, body) => {
 
 module.exports.badRequest = (res, msg, body) => {
     return res.status(400).json({
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 422,
         success: false,
         message: msg || "Unprocessable Entity",
@@ -71,6 +76,7 @@ module.exports.badRequest = (res, msg, body) => {
 
 module.exports.conflict = (res, msg, body) => {
     return res.status(409).json({
+        requestTime: `${((new Date() - (res.time || new Date())) / 1000)}s`,
         statusCode: 409,
         success: false,
         message: msg || "Conflict",

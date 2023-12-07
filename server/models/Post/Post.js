@@ -38,16 +38,27 @@ const postSchema = new mongoose.Schema({
     userId: {
         type: String
     },
-    minExperience:{
+    minExperience: {
         type: Number,
         default: true,
     },
-    maxExperience:{
+    maxExperience: {
         type: Number,
         default: true,
     },
     experienceUnit: {
         type: String
+    },
+    author: {
+        type: String,
+        required: true,
+    },
+    pinned: {
+        type: Boolean,
+        default: false
+    },
+    priority: {
+        type: Number
     }
 });
 

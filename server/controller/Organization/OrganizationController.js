@@ -5,7 +5,8 @@ const { throughError, created, success, notFound, notModified } = require("../..
 class OrganizationController {
     async saveOrganization(req, res, next) {
         try {
-            let time = new Date();
+            req.body.author = req.user;
+            res.time = new Date();
             let organization = await OrganizationService.createOrganization(req.body);
             if (organization) {
                 return created(res, "Created successfully", user);
@@ -18,8 +19,7 @@ class OrganizationController {
     }
     async getOrganization(req, res, next) {
         try {
-            let time = new Date();
-            console.log(res);
+            res.time = new Date();
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
             let query = req.query || {};
@@ -36,6 +36,7 @@ class OrganizationController {
     }
     async getOneOrganization(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let organization = await OrganizationService.getOneOrganization({ id });
             if (organization) {
@@ -49,6 +50,7 @@ class OrganizationController {
     }
     async updateOrganization(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let updated = await OrganizationService.updateOrganization({ query: { id }, option: req.body });
             if (updated && updated.nMatched && updated.nModified) {
@@ -62,6 +64,7 @@ class OrganizationController {
     }
     async deleteOrganization(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let deleted = await OrganizationService.deleteOrganization({ id });
             if (deleted && deleted.ok) {

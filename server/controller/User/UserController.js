@@ -4,7 +4,7 @@ const { throughError, created, success, notFound, notModified, badRequest } = re
 class UserController {
     async saveUser(req, res, next) {
         try {
-            console.log(req.body)
+            res.time = new Date();
             let user = await UserService.createUser(req.body);
             if (user) {
                 return created(res, "Created successfully", user);
@@ -17,6 +17,7 @@ class UserController {
     }
     async getUser(req, res, next) {
         try {
+            res.time = new Date();
             res.requestTime = new Date();
             let page = req.query.page ? +req.query.page : 1;
             let limit = req.query.limit ? +req.query.limit : 10;
@@ -34,6 +35,7 @@ class UserController {
     }
     async getOneUser(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let user = await UserService.getOneUser({ id });
             if (user) {
@@ -47,6 +49,7 @@ class UserController {
     }
     async updateUser(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let updated = await UserService.updateUser({ query: { id }, option: req.body });
             if (updated && updated.nMatched && updated.nModified) {
@@ -60,6 +63,7 @@ class UserController {
     }
     async deleteUser(req, res, next) {
         try {
+            res.time = new Date();
             let { id } = req.params;
             let deleted = await UserService.deleteUser({ id });
             if (deleted && deleted.ok) {
@@ -73,6 +77,7 @@ class UserController {
     }
     async logIn(req, res, next) {
         try {
+            res.time = new Date();
             if (!req.body.userName || !req.body.password) {
                 return badRequest(res, "Username and password are required", {});
             }
