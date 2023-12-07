@@ -15,7 +15,7 @@ class RatingRepository {
         return rating;
     }
     async updatedRating(query, updatedObj) {
-        const updatedRating = await Rating.update({ ...query }, { ...updatedObj });
+        const updatedRating = await Rating.updateMany({ ...query }, { ...updatedObj });
         return updatedRating;
     }
     async deletedRating(query) {

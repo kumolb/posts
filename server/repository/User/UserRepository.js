@@ -22,7 +22,7 @@ class UserRepository {
         return user;
     }
     async updatedUser(query, updatedObj) {
-        const updatedUser = await User.update({ ...query }, { ...updatedObj });
+        const updatedUser = await User.updateOne({ ...query }, { ...updatedObj });
         return updatedUser;
     }
     async deletedUser(query) {

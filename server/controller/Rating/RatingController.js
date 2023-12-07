@@ -52,8 +52,8 @@ class RatingController {
             res.time = new Date();
             let { id } = req.params;
             let updated = await RatingService.updateRating({ query: { id }, option: req.body });
-            if (updated && updated.nMatched && updated.nModified) {
-                return success(res, "Updated successfully", {});
+            if (updated && updated.modifiedCount && updated.matchedCount) {
+                return success(res, "Updated successfully", await RatingService.getOneRating({ id }));
             } else {
                 return notModified(res, "Not modified", {});
             }

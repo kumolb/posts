@@ -24,7 +24,7 @@ class OrganizationService {
         return await OrganizationRepository.deleteOrganization(query)
     }
 
-    async OrganizationCount(query) {
+    async organizationCount(query) {
         return await OrganizationRepository.countOrganization(query);
     }
 }

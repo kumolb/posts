@@ -18,7 +18,7 @@ class OrganizationRepository {
 
     // Update
     async updateOrganization({ id }, data) {
-        return await Organization.update({ id }, { $set: data });
+        return await Organization.updateMany({ id }, { $set: data });
     }
 
     // Delete

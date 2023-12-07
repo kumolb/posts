@@ -17,7 +17,7 @@ class PostRepository {
         return post;
     }
     async updatedPost(query, updatedObj) {
-        const updatedPost = await Post.update({ ...query }, { ...updatedObj });
+        const updatedPost = await Post.updateMany({ ...query }, { ...updatedObj });
         return updatedPost;
     }
     async deletedPost(query) {

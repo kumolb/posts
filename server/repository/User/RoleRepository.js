@@ -17,7 +17,7 @@ class RoleRepository {
         return role;
     }
     async updatedRole(query, updatedObj) {
-        const updatedRole = await Role.update({ ...query }, { ...updatedObj });
+        const updatedRole = await Role.updateMany({ ...query }, { ...updatedObj });
         return updatedRole;
     }
     async deletedRole(query) {
