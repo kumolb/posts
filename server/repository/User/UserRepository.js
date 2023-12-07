@@ -4,7 +4,7 @@ class UserRepository {
         const newUser = new User(data);
         newUser.id = newUser._id;
         let isPhoneExist = await this.userCount({ phone: newUser.phone });
-        let isEmailExist = await this.userCount({ $and: [{ email: { $exists: true } }, { email: { $eq: newUser.email } }] });
+        let isEmailExist = await this.userCount({ $and: [{ email: { $exists: true } }, { email: { $ne: "" } }, { email: { $eq: newUser.email } }] });
         if (isPhoneExist || isEmailExist) {
             throw new Error(`${isPhoneExist ? "Phone" : "Email"} already exists`);
         }
