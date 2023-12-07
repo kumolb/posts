@@ -24,7 +24,7 @@ class PostController {
             if (post && post.length > 0) {
                 return success(res, "Post fatched successful", post, { page, limit, total: totalPost });
             } else {
-                return notFound(res, "No Post found", []);
+                return notFound(res, "No Post found", [], { page, limit, total: totalPost });
             }
         } catch (error) {
             return throughError(res, error);

@@ -28,7 +28,7 @@ class OrganizationController {
             if (organization && organization.length > 0) {
                 return success(res, "Organization fatched successful", organization, { page, limit, total: totalOrganization });
             } else {
-                return notFound(res, "No Organization found", []);
+                return notFound(res, "No Organization found", [], { page, limit, total: totalOrganization });
             }
         } catch (error) {
             return throughError(res, error);

@@ -26,7 +26,7 @@ class UserController {
             if (user && user.length > 0) {
                 return success(res, "User fatched successful", user, { page, limit, total: totalUser });
             } else {
-                return notFound(res, "No user found", []);
+                return notFound(res, "No user found", [], { page, limit, total: totalUser });
             }
         } catch (error) {
             return throughError(res, error);
