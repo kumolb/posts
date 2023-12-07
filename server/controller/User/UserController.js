@@ -1,6 +1,6 @@
+const AuthService = require("../../service/User/AuthService");
 const UserService = require("../../service/User/UserService");
-const { throughError, created, success, notFound, notModified } = require("../../shared/utils/HttpResponseHandler");
-
+const { throughError, created, success, notFound, notModified, badRequest } = require("../../shared/utils/HttpResponseHandler");
 class UserController {
     async saveUser(req, res, next) {
         try {
@@ -71,7 +71,16 @@ class UserController {
             return throughError(res, error);
         }
     }
-
+    async logIn(req, res, next) {
+        try {
+            if (!req.body.userName || !req.body.password) {
+                return badRequest(res, "Username and password are required", {});
+            }
+            return await AuthService.logIn(res, req.body);
+        } catch (error) {
+            return throughError(res, error);
+        }
+    }
 }
 
 module.exports = new UserController();
