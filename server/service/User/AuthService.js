@@ -6,16 +6,14 @@ class AuthService {
 
     }
 
-    encryptPassword(password){
-        const saltRounds = process.env.SALT;
-bcrypt.genSalt(saltRounds, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
+    async encryptPassword(password) {
+        const saltRounds = +process.env.SALT;
+        let salt = await bcrypt.genSalt(saltRounds);
+        let hash = await bcrypt.hash(password, salt);
         return hash;
-    });
-});
     }
 
-    encryptedPasswordCompare(password, encryptedPassword){
+    async encryptedPasswordCompare(password, encryptedPassword) {
 
     }
 }
