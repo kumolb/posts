@@ -51,7 +51,7 @@ class RoleController {
         try {
             res.time = new Date();
             let { id } = req.params;
-            let updated = await RoleService.updateRole({ query: { id }, option: req.body });
+            let updated = await RoleService.updateRole({ query: id, option: req.body });
             if (updated && updated.nMatched && updated.nModified) {
                 return success(res, "Updated successfully", {});
             } else {

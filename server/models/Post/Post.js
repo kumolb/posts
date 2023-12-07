@@ -59,6 +59,10 @@ const postSchema = new mongoose.Schema({
     },
     priority: {
         type: Number
+    },
+    id: {
+        type: String,
+        required: true,
     }
 });
 

@@ -3,6 +3,7 @@ const Organization = require("../../models/Organization/Organization");
 class OrganizationRepository {
     async createOrganization(data) {
         const organization = new Organization(data);
+        organization.id = organization._id;
         return await organization.save();
     }
 

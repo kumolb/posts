@@ -17,7 +17,8 @@ class RoleService {
     }
 
     async updateRole(data) {
-        return await RoleRepository.updatedRole(data.query, data.option);
+        let query = { $or: [{ id: data.query }, { roleId: data.query }] }
+        return await RoleRepository.updatedRole(query, data.option);
     }
 
     async deleteRole(data) {

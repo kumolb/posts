@@ -2,6 +2,7 @@ const Post = require("../../models/Post/Post");
 class PostRepository {
     async savePost(data) {
         const newPost = new Post(data);
+        newPost.id = newPost._id;
         const savedPost = await newPost.save();
         return savedPost;
     }

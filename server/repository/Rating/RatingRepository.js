@@ -2,6 +2,7 @@ const Rating = require("../../models/Rating/Rating");
 class RatingRepository {
     async saveRating(data) {
         const newRating = new Rating(data);
+        newRating.id = newRating._id;
         const savedRating = await newRating.save();
         return savedRating;
     }

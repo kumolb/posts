@@ -38,13 +38,13 @@ class Auth {
             }
             token = token.split(" ")[1];
             var decoded = jwt.verify(token, process.env.SECRET);
-            if ((timeNow - decoded.exp) <= 0) {
+            if (timeNow >= decoded.exp) {
                 return res.status(401).json({
                     statusCode: "401",
                     message: "Token expires"
                 })
             }
-            if (decode.roleId = "1") {
+            if (decoded.roleId != "1") {
                 return res.status(403).json({
                     statusCode: "403",
                     message: "forbidden"
