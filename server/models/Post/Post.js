@@ -63,6 +63,43 @@ const postSchema = new mongoose.Schema({
     id: {
         type: String,
         required: true,
+    },
+    responsiblilities: {
+        type: [String],
+        required: true
+    },
+    benifits: {
+        type: [String],
+        required: true
+    },
+    aboutUs: {
+        type: String
+    },
+    positionSummary: {
+        type: String,
+        required: true
+    },
+    vacancy: {
+        type: Number,
+        required: true
+    },
+    qualifications: {
+        type: {
+            experience: {
+                type: [String]
+            },
+            additional: {
+                type: [String]
+            },
+            requiredSkills: {
+                type: [String],
+                required: true
+            }
+        }
+    },
+    approved: {
+        type: Boolean,
+        default: true
     }
 });
 
