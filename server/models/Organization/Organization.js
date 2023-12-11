@@ -50,10 +50,10 @@ const organizationSchema = new mongoose.Schema({
         required: true,
     },
     foundedYear: {
-        type: Number,
+        type: String,
         required: true,
     },
-    CEO: {
+    ceo: {
         type: String,
         required: true,
     },
@@ -77,12 +77,7 @@ const organizationSchema = new mongoose.Schema({
     author: {
         type: String,
         required: true
-    },
-
-    id: {
-        type: String,
-        required: true
-    },
+    }
 });
 
 const Organization = mongoose.model('Organization', organizationSchema);

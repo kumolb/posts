@@ -100,6 +100,10 @@ const postSchema = new mongoose.Schema({
     approved: {
         type: Boolean,
         default: true
+    },
+    viewed: {
+        type: Number,
+        default: 0
     }
 });
 

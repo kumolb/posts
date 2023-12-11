@@ -23,7 +23,7 @@ class OrganizationRepository {
 
     // Delete
     async deleteOrganization({ id }) {
-        return await Organization.findByIdAndDelete({ id });
+        return await Organization.deleteMany({ id });
     }
 
     async countOrganization(query) {
