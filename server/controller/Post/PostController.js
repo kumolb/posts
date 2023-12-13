@@ -52,6 +52,7 @@ class PostController {
             res.time = new Date();
             let { id } = req.params;
             let updated = await PostService.updatePost({ query: { id }, option: req.body });
+            console.log(updated)
             if (updated && updated.modifiedCount && updated.matchedCount) {
                 return success(res, "Updated successfully", await PostService.getOnePost({ id }));
             } else {
