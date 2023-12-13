@@ -1,6 +1,12 @@
 const PostRepository = require("../../repository/Post/PostRepository");
+const OrganizationService = require("../Organization/OrganizationService");
 class PostService {
     async createPost(data) {
+        let orgData = await OrganizationService.getOneOrganization({ id: data.orgId })
+        if (!orgData) {
+            throw new Error("Invalid organization")
+        }
+        data.orgName = orgData.name;
         let post = await PostRepository.savePost(data);
         return post;
     }

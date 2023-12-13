@@ -35,7 +35,10 @@ const postSchema = new mongoose.Schema({
     orgId: {
         type: String
     },
-    userId: {
+    orgName: {
+        type: String
+    },
+    author: {
         type: String
     },
     minExperience: {
@@ -104,6 +107,10 @@ const postSchema = new mongoose.Schema({
     viewed: {
         type: Number,
         default: 0
+    },
+    status: {
+        type: String,
+        default: "active"
     }
 });
 
