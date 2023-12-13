@@ -8,7 +8,7 @@ class Auth {
             if (!token) {
                 return res.status(401).json({
                     statusCode: "401",
-                    message: "Token missing"
+                    message: "Token missing! Login and try once again"
                 })
             }
             token = token.split(" ")[1];
@@ -16,7 +16,7 @@ class Auth {
             if (timeNow >= decoded.exp) {
                 return res.status(401).json({
                     statusCode: "401",
-                    message: "Token expires"
+                    message: "Token expires! Login and try once again"
                 })
             }
             req.user = decoded.id;
@@ -33,7 +33,7 @@ class Auth {
             if (!token) {
                 return res.status(401).json({
                     statusCode: "401",
-                    message: "Token missing"
+                    message: "Token missing! Login and try once again"
                 })
             }
             token = token.split(" ")[1];
@@ -41,13 +41,13 @@ class Auth {
             if (timeNow >= decoded.exp) {
                 return res.status(401).json({
                     statusCode: "401",
-                    message: "Token expires"
+                    message: "Token expires! Login and try once again"
                 })
             }
             if (decoded.roleId != "1") {
                 return res.status(403).json({
                     statusCode: "403",
-                    message: "forbidden"
+                    message: "Forbidden, You don't have this particular access. Please connect to the admin"
                 })
             }
             req.user = decoded.id;
