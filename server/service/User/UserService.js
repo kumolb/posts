@@ -20,6 +20,9 @@ class UserService {
     }
 
     async updateUser(data) {
+        if (data.password) {
+            data.password = await AuthService.encryptPassword(data.password);
+        }
         return await UserRepository.updatedUser(data.query, data.option);
     }
 

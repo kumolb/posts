@@ -7,9 +7,9 @@ class RoleRepository {
         return savedRole;
     }
     async getRole(query, option) {
-        let limit = option.limit;
-        let page = option.page;
-        let role = await Role.find(query).lean().skip(limit * (page - 1)).limit(limit);
+        let limit = option?.limit;
+        let page = option?.page;
+        let role = limit && page ? await Role.find(query).lean().skip(limit * (page - 1)).limit(limit) : await Role.find(query).lean();
         return role;
     }
     async getOneRole(query) {

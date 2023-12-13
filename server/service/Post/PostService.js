@@ -7,7 +7,7 @@ class PostService {
     async getPost(data) {
         let query = data.query;
         let option = data.option;
-        let post = await PostRepository.getOnePost(query, option);
+        let post = await PostRepository.getPost(query, option);
         return post;
     }
 

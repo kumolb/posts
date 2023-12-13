@@ -7,9 +7,9 @@ class PostRepository {
         return savedPost;
     }
     async getPost(query, option) {
-        let limit = option.limit;
-        let page = option.page;
-        let post = await Post.find(query).lean().skip(limit * (page - 1)).limit(limit);
+        let limit = option?.limit;
+        let page = option?.page;
+        let post = page && limit ? await Post.find(query).lean().skip(limit * (page - 1)).limit(limit) : await Post.find(query).lean();
         return post;
     }
     async getOnePost(query) {

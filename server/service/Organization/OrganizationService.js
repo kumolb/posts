@@ -1,11 +1,6 @@
 const OrganizationRepository = require("../../repository/Organization/OrganizationRepository");
-const AuthService = require("../User/AuthService");
-
 class OrganizationService {
     async createOrganization(data) {
-        if (data.password) {
-            data.password = await AuthService.encryptPassword(data.password);
-        }
         let organization = await OrganizationRepository.createOrganization(data);
         return organization;
     }
@@ -17,7 +12,7 @@ class OrganizationService {
     }
 
     async getOneOrganization(query) {
-        return await OrganizationRepository.getOrganizationById(query);
+        return await OrganizationRepository.getOneOrganization(query);
     }
 
     async updateOrganization(query) {
