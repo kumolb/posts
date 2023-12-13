@@ -6,13 +6,17 @@ class RatingRepository {
         const savedRating = await newRating.save();
         return savedRating;
     }
-    async getRating(query) {
-        const ratings = await Rating.find(query).lean();
-        return ratings;
-    }
-    async getRating(query) {
-        const rating = await Rating.findOne(query).lean();
+    async getOneRating(query) {
+        let select = "-__v -_id";
+        const rating = await Rating.findOne(query).select(select).lean();
         return rating;
+    }
+    async getRating(query, option) {
+        let page = option?.page;
+        let limit = option?.limit;
+        let select = "-__v -_id";
+        const ratings = page && limit ? await Rating.find(query).skip(limit * (page - 1)).limit(limit).select(select).lean() : await Rating.find(query).select(select).lean();
+        return ratings;
     }
     async updatedRating(query, updatedObj) {
         const updatedRating = await Rating.updateMany({ ...query }, { ...updatedObj });

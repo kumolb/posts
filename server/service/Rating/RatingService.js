@@ -7,7 +7,7 @@ class RatingService {
     async getRating(data) {
         let query = data.query;
         let option = data.option;
-        let rating = await RatingRepository.getOneRating(query, option);
+        let rating = await RatingRepository.getRating(query, option);
         return rating;
     }
 
