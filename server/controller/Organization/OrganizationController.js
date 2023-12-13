@@ -9,7 +9,7 @@ class OrganizationController {
             res.time = new Date();
             let organization = await OrganizationService.createOrganization(req.body);
             if (organization) {
-                return created(res, "Created successfully", user);
+                return created(res, "Created successfully", organization);
             } else {
                 return throughError(res, { message: "Organization creation failed" });
             }

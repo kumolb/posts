@@ -12,7 +12,7 @@ class AuthService {
             return badRequest(res, "Usernamd and password are required");
         }
         query = { $or: [{ email: { $eq: userName } }, { phone: { $eq: userName } }] }
-        let user = await UserRepository.getOneUser(query);
+        let user = await UserRepository.getOneUser(query, true);
         if (user) {
             let passwordMatched = await this.encryptedPasswordCompare(password, user.password);
             if (passwordMatched) {

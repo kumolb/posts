@@ -8,7 +8,7 @@ class OrganizationRepository {
         }
         const organization = new Organization(data);
         organization.id = organization._id;
-        let userNameExist = await this.countOrganization({ userName: data.userNameExist });
+        let userNameExist = await this.countOrganization({ userName: data.userName });
         if (userNameExist) {
             throw new Error("Username alread exist");
         }

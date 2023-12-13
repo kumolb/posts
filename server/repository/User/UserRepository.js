@@ -18,8 +18,8 @@ class UserRepository {
         let user = page && limit ? await User.find(query).skip(limit * (page - 1)).limit(limit).lean().select(select) : await User.find(query).lean().select(select);
         return user;
     }
-    async getOneUser(query) {
-        let select = "-__v -password -_id";
+    async getOneUser(query, password) {
+        let select = password ? "-__v -_id" : "-__v -password -_id";
         let user = await User.findOne(query).lean().select(select);
         return user;
     }
