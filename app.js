@@ -10,6 +10,13 @@ app.use(morgan("dev"));
 app.use(express.static("public"));
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use("/", (req, res) => {
+    res.status(200).json({
+        success: true,
+        statusCode: 204,
+        message: "No route found"
+    });
+})
 app.use("/api", appRouter);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
