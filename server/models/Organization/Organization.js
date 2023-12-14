@@ -77,6 +77,10 @@ const organizationSchema = new mongoose.Schema({
     author: {
         type: String,
         required: true
+    },
+    image: {
+        type: String,
+        default: ""
     }
 });
 

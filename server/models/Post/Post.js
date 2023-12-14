@@ -111,6 +111,10 @@ const postSchema = new mongoose.Schema({
     status: {
         type: String,
         default: "active"
+    },
+    image: {
+        type: [String],
+        default: []
     }
 });
 
