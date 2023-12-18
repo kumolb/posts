@@ -6,7 +6,9 @@ route.post("/upload/file", upload.single("file"), (req, res, next) => {
     try {
         console.log(req.file, req.body)
         res.json({
-            filePath: ""
+            success: true,
+            statusCode: "200",
+            filePath: `uploads/${req.file.filename}`
         })
     } catch (err) {
         return throughError(res, err)
