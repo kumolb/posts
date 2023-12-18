@@ -4,7 +4,6 @@ const route = require("express").Router();
 
 route.post("/upload/file", upload.single("file"), (req, res, next) => {
     try {
-        console.log(req.file, req.body)
         res.json({
             success: true,
             statusCode: "200",
