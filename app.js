@@ -7,18 +7,17 @@ const appRouter = require("./api/api");
 const app = express();
 // const morgan = require("morgan");
 // app.use(morgan("dev"));
-
+const path = require('path')
+app.use('/static', express.static(path.join(__dirname, 'public')))
+app.use('uploads', express.static(path.join(__dirname, 'uploads')))
 const multer = require('multer')
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, '/uploads')
+        cb(null, './uploads')
     },
     filename: function (req, file, cb) {
-        console.log(file);
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-        console.log(uniqueSuffix);
-        cb(null, file.fieldname + '-' + uniqueSuffix)
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + "." + file.mimetype.split("/")[1])
     }
 })
 const upload = multer({
@@ -41,8 +40,11 @@ const upload = multer({
 app.post("/upload/file", upload.single("file"), (req, res, next) => {
     try {
         // console.log(req.file, req.body)
+        console.log(req.file)
         res.json({
-            filePath: ""
+            success: true,
+            statusCode: 200,
+            filePath: `localhost:3000/${req.file.path}`
         })
     } catch (err) {
         console.log(err);
@@ -50,7 +52,6 @@ app.post("/upload/file", upload.single("file"), (req, res, next) => {
     }
 });
 
-app.use(express.static("public"));
 app.use(express.json({ limit: "50mb", extended: true }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use("/", (req, res) => {
