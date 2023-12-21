@@ -3,6 +3,7 @@ const Tag = require("../../models/Post/Tag");
 class TagsRepository {
     async createTags(doc) {
         let newtag = new Tag(doc);
+        newtag.id = newtag._id;
         return await newtag.save();
     }
 
@@ -29,6 +30,10 @@ class TagsRepository {
 
     async deleteTag(query) {
         return await Tag.deleteMany(query);
+    }
+
+    async countTag(query) {
+        return await Tag.countDocuments(query);
     }
 }
 

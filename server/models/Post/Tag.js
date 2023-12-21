@@ -11,9 +11,11 @@ const tagsSchema = new mongoose.Schema({
     }
 });
 
+
+
+module.exports = mongoose.model("Tags", tagsSchema, "tags");
+
 tagsSchema.pre("save", (doc, next) => {
     doc.id = doc._id;
     next()
 });
-
-module.exports = mongoose.model("Tags", tagsSchema, "tags");

@@ -22,6 +22,24 @@ class TagService {
         data.title ? query.title = data.title : null;
         return await TagsRepository.getSingleTag(query);
     }
+
+    async updateTag(data) {
+        let query = {};
+        let updateObj = {};
+        updateObj.title = data.title;
+        query.id = data.id;
+        return await TagsRepository.updateTag(query, { $set: updateObj });
+    }
+
+    async deleteTag(data) {
+        let query = {};
+        query.id = data.id;
+        return await TagsRepository.deleteTag(query);
+    }
+
+    async countTag(query) {
+        return await TagsRepository.countTag(query);
+    }
 }
 
 module.exports = new TagService();
